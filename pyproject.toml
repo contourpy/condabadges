@@ -18,6 +18,11 @@ classifiers = [
     "Topic :: Utilities",
 ]
 dependencies = [
+    "dask[dataframe]",
+    "pyarrow",
+    "pyyaml",
+    "requests",
+    "s3fs",
 ]
 description = "Generate badges for monthly conda downloads for contourpy repositories"
 license = {text = "BSD-3-Clause"}
