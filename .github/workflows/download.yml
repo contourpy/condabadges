@@ -1,0 +1,38 @@
+name: Download
+
+on:
+  schedule:
+    - cron: "27 2 5 * *"
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout source
+        uses: actions/checkout@v3
+
+      - name: Install Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.10'
+
+      - name: Install condabadges
+        shell: bash
+        run: |
+          pip install -ve .
+
+      - name: Run
+        shell: bash
+        run: |
+          python -c "import condabadges as cb; cb.run()"
+
+      - name: Commit new files
+        shell: bash
+        run: |
+          git config --local user.name "gha"
+          git add cache/*svg
+          git add cache/*yaml
+          git diff-index --quiet HEAD || git commit -m "Update cache"
+          git push
