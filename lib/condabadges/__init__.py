@@ -72,10 +72,10 @@ def _prev_month_downloads(project: str) -> dict[str: int]:
 
     ddf = ddf[ddf.pkg_name==project]
 
-    grouped = ddf.groupby("data_source").sum().compute()
-    nonzero = grouped[grouped.counts > 0]
+    grouped = ddf.groupby("data_source").counts.sum().compute()
+    nonzero = grouped[grouped > 0]
 
-    monthly_downloads = nonzero.to_dict()["counts"]
+    monthly_downloads = nonzero.to_dict()
     print(monthly_downloads)
 
     return monthly_downloads
