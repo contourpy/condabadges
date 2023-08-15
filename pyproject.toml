@@ -19,7 +19,7 @@ classifiers = [
 ]
 dependencies = [
     "dask[dataframe]",
-    "pyarrow",
+    "pyarrow <12",
     "pyyaml",
     "requests",
     "s3fs",
