@@ -66,6 +66,7 @@ def _prev_month_downloads(project: str) -> dict[str: int]:
 
     ddf = dd.read_parquet(
         url,
+        categories=[],
         columns=("counts", "data_source", "pkg_name"),
         storage_options={"anon": True},
     )
